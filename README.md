@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column          | Type   | Options     |
-| --------------- | ------ | ----------- |
-| nickname        | string | null: false |
-| email           | string | null: false |
-| password        | string | null: false | 
-| last_name       | string | null: false |
-| first_name      | string | null: false |
-| last_name_kana  | string | null: false |
-| first_name_kana | string | null: false |
-| birthday        | date   | null: false |
+| Column             | Type   | Options      |
+| ------------------ | ------ | ------------ |
+| nickname           | string | null: false  |
+| email              | string | unique: true |
+| encrypted_password | string | null: false  | 
+| last_name          | string | null: false  |
+| first_name         | string | null: false  |
+| last_name_kana     | string | null: false  |
+| first_name_kana    | string | null: false  |
+| birthday           | date   | null: false  |
 
 ### Association
 
@@ -22,55 +22,40 @@
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ | 
-| item_name   | text       | null: false                    |
+| name        | string     | null: false                    |
 | explanation | text       | null: false                    |
 | category    | string     | null: false                    | 
 | status      | string     | null: false                    |
 | burden      | string     | null: false                    |
 | area        | string     | null: false                    |
 | days        | string     | null: false                    |
-| price       | int        | null: false                    |
+| price       | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :product_purchases
-- has_one :purchases, through :product_purchases 
+- has_one :purchases
 - belongs_to :user
 
-## purchases テーブル
-
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ | 
-| purchase_date | date       | null: false                    |
-| user          | references | null: false, foreign_key: true |
-
-### Association
-
-- has_many :product_purchases
-- has_many :purchase_residences
-- has_one :products, through :product_purchases
-- has_one :residences, through :purchase_residences
-- belongs_to :user
-
-## product_purchases テーブル
+##  purchases テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ | 
 | product       | references | null: false, foreign_key: true |
-| purchase      | references | null: false, foreign_key: true |
+| residence     | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :product
-- belongs_to :purchase
+- has_one :residences
+- belong_to :product
+- belong_to :user
 
 ## residences テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ | 
 | postal_code  | integer    | null: false                    |
-| prefectures  | string     | null: false                    |
+| prefecture   | integer    | null: false                    |
 | municipality | string     | null: false                    | 
 | address      | string     | null: false                    |
 | building     | string     |                                |
@@ -78,17 +63,4 @@
 
 ### Association
 
-- has_many :purchase_residences
-- has_one :residences, through :purchase_residences 
-
-## purchase_residences テーブル
-
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ | 
-| purchase      | references | null: false, foreign_key: true |
-| residence     | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :purchase
 - belongs_to :residence
