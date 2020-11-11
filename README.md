@@ -24,11 +24,11 @@
 | ----------- | ---------- | ------------------------------ | 
 | name        | string     | null: false                    |
 | explanation | text       | null: false                    |
-| category    | string     | null: false                    | 
-| status      | string     | null: false                    |
-| burden      | string     | null: false                    |
-| area        | string     | null: false                    |
-| days        | string     | null: false                    |
+| category_id | integer    | null: false                    | 
+| status_id   | integer    | null: false                    |
+| burden_id   | integer    | null: false                    |
+| area_id     | integer    | null: false                    |
+| days_id     | integer    | null: false                    |
 | price       | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
 
@@ -42,7 +42,7 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ | 
 | product       | references | null: false, foreign_key: true |
-| residence     | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -52,15 +52,16 @@
 
 ## residences テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ | 
-| postal_code  | integer    | null: false                    |
-| prefecture   | integer    | null: false                    |
-| municipality | string     | null: false                    | 
-| address      | string     | null: false                    |
-| building     | string     |                                |
-| telephone    | integer    | null: false                    |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ | 
+| postal_code   | string     | null: false                    |
+| prefecture-id | integer    | null: false                    |
+| municipality  | string     | null: false                    | 
+| address       | string     | null: false                    |
+| building      | string     |                                |
+| telephone     | integer    | null: false                    |
+| purchase      | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :residence
+- belongs_to :purchase
