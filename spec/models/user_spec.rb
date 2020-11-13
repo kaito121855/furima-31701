@@ -58,7 +58,6 @@ describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'passwordが全角では登録できない' do
-        binding.pry
         @user.password = 'AAAAAA'
         @user.password_confirmation = 'AAAAAA'
         @user.valid?
