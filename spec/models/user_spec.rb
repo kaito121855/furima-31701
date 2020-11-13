@@ -50,6 +50,11 @@ describe User, type: :model do
         anather_user.valid?
         expect(anather_user.errors.full_messages).to include('Email has already been taken', 'Email has already been taken')
       end
+      it 'emailに@がない場合は登録できない' do
+        @user.email = 'text123gmail.com'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
       it 'passwordが空では登録できない' do
         @user.password = ''
         @user.valid?
