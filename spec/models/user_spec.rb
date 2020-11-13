@@ -9,27 +9,6 @@ describe User, type: :model do
       it 'nickname,email,password,password_confirmation,last_name,first_name,last_name_kana,first_name_kana,birthdayが存在すれば登録できる' do
         expect(@user).to be_valid
       end
-      it 'passwordが6文字以上かつ半角英数字混合であり@を含んであれば登録できる' do
-        @user.password = 'aaa111'
-        @user.password_confirmation = 'aaa111'
-        expect(@user).to be_valid
-      end
-      it 'last_nameが全角（漢字・ひらがな・カタカナ）であれば登録できる' do
-        @user.last_name = '佐藤'
-        expect(@user).to be_valid
-      end
-      it 'first_nameが全角（漢字・ひらがな・カタカナ）であれば登録できる' do
-        @user.first_name = '太郎'
-        expect(@user).to be_valid
-      end
-      it 'last_name_kanaが全角（カタカナ）であれば登録できる' do
-        @user.last_name_kana = 'サトウ'
-        expect(@user).to be_valid
-      end
-      it 'first_name_kanaが全角（カタカナ）であれば登録できる' do
-        @user.first_name_kana = 'タロウ'
-        expect(@user).to be_valid
-      end
     end
 
     context '新規登録がうまくいかないとき' do
@@ -66,9 +45,15 @@ describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
-      it 'passwordが半角英数字混合でない場合は登録できない' do
+      it 'passwordが数字のみでは登録できない' do
         @user.password = '111111'
         @user.password_confirmation = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+      it 'passwordが英字のみでは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
