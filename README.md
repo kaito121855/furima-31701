@@ -47,8 +47,8 @@
 ### Association
 
 - has_one :residences
-- belong_to :product
-- belong_to :user
+- belongs_to :product
+- belongs_to :user
 
 ## residences テーブル
 
