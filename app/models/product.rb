@@ -20,5 +20,5 @@ class Product < ApplicationRecord
     validates :area_id
     validates :day_id
   end
-  validates :price, presence: true, format: { /\A[0-9]+\z/ }
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/ } 
 end
