@@ -28,13 +28,13 @@
 | status_id   | integer    | null: false                    |
 | burden_id   | integer    | null: false                    |
 | area_id     | integer    | null: false                    |
-| days_id     | integer    | null: false                    |
+| day_id      | integer    | null: false                    |
 | price       | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :purchases
+- has_one :purchase
 - belongs_to :user
 
 ##  purchases テーブル
@@ -46,7 +46,7 @@
 
 ### Association
 
-- has_one :residences
+- has_one :residence
 - belongs_to :product
 - belongs_to :user
 
