@@ -10,6 +10,7 @@ class Product < ApplicationRecord
   belongs_to :day
   
   with_options presence: true do
+    validates :image
     validates :name
     validates :explanation
   end
