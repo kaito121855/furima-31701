@@ -37,18 +37,19 @@ class ProductsController < ApplicationController
   def destroy
     redirect_to root_path if @product.destroy
   end
-end
 
-private
+  private
 
-def product_params
-  params.require(:product).permit(:image, :name, :explanation, :category_id, :status_id, :burden_id, :area_id, :day_id, :price).merge(user_id: current_user.id)
-end
+  def product_params
+    params.require(:product).permit(:image, :name, :explanation, :category_id, :status_id, :burden_id, :area_id, :day_id, :price).merge(user_id: current_user.id)
+  end
 
-def move_to_index
-  redirect_to action: :index unless current_user.id == @product.user_id
-end
+  def move_to_index
+    redirect_to action: :index unless current_user.id == @product.user_id
+  end
 
-def set_product
-  @product = Product.find(params[:id])
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
 end
