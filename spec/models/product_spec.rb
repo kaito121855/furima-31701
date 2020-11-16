@@ -32,47 +32,47 @@ RSpec.describe Product, type: :model do
       it 'category_idが1だと登録できない' do
         @product.category_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category must be other than 1")
+        expect(@product.errors.full_messages).to include('Category must be other than 1')
       end
       it 'status_idが1だと登録できない' do
         @product.status_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Status must be other than 1")
+        expect(@product.errors.full_messages).to include('Status must be other than 1')
       end
       it 'burden_idが1だと登録できない' do
         @product.burden_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Burden must be other than 1")
+        expect(@product.errors.full_messages).to include('Burden must be other than 1')
       end
       it 'area_idが1だと登録できない' do
         @product.area_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Area must be other than 1")
+        expect(@product.errors.full_messages).to include('Area must be other than 1')
       end
       it 'day_idが1だと登録できない' do
         @product.day_id = '1'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Day must be other than 1")
+        expect(@product.errors.full_messages).to include('Day must be other than 1')
       end
       it 'priceが空だと登録できない' do
         @product.price = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price can't be blank", "Price is not included in the list", "Price is invalid")
+        expect(@product.errors.full_messages).to include("Price can't be blank", 'Price is not included in the list', 'Price is invalid')
       end
       it 'priceが299以下の場合だと登録できない' do
         @product.price = 299
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not included in the list")
+        expect(@product.errors.full_messages).to include('Price is not included in the list')
       end
       it 'priceが10,000,000以上の場合だと登録できない' do
-        @product.price = 10000000
+        @product.price = 10_000_000
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not included in the list")
+        expect(@product.errors.full_messages).to include('Price is not included in the list')
       end
       it 'priceが全角数字の場合だと登録できない' do
         @product.price = '３００'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not included in the list")
+        expect(@product.errors.full_messages).to include('Price is not included in the list')
       end
     end
   end
