@@ -9,15 +9,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # binding.pry
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
-      Payjp.api_key = "sk_test_ff68a3056119ddc5f9d5a815"
-      Payjp::Charge.create(
-        amount: @product.price,
-        card: order_params[:token],
-        currency: 'jpy'
-      )
+      pry_item
       @order_form.save
       redirect_to root_path
     else
@@ -40,6 +34,15 @@ class OrdersController < ApplicationController
 
   def move_to_index_product
     redirect_to root_path if @product.order.present?
+  end
+
+  def pry_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @product.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
   end
 
 end
