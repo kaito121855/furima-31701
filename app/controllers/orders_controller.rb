@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :set_product, only: [:index, :create]
+  before_action :set_product, only: [:index, :create, :move_to_index_product]
+  before_action :authenticate_user!, only: [:index]
+  before_action :move_to_index_user, only: [:index]
+  before_action :move_to_index_product, only: [:index]
 
   def index
     @order_form = OrderForm.new
@@ -29,6 +32,14 @@ class OrdersController < ApplicationController
 
   def set_product
     @product = Product.find(params[:product_id])
+  end
+
+  def move_to_index_user
+    redirect_to root_path if current_user.id == @product.user_id
+  end
+
+  def move_to_index_product
+    redirect_to root_path if @product.order.present?
   end
 
 end
