@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @product = Product.find(params[:id])
+    @product = Product.find(params[:product_id])
     @order_form = OrderForm.new
   end
 
