@@ -11,16 +11,16 @@ class Product < ApplicationRecord
   belongs_to :day
 
   with_options presence: true do
-    validates :image
+    validates :image, presence: { message: "を選択してください"}
     validates :name
     validates :explanation
   end
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: "は「---」以外のものを選択してください"}  do
     validates :category_id
     validates :status_id
     validates :burden_id
     validates :area_id
     validates :day_id
   end
-  validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+  validates :price, presence: true, inclusion: { in: 300..9_999_999, message: "は300〜9,999,999円の範囲で入力してください"}
 end
